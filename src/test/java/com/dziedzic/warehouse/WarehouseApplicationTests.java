@@ -1,4 +1,4 @@
-package com.dziedzic.filecompresser;
+package com.dziedzic.warehouse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FilecompresserApplicationTests {
+public class WarehouseApplicationTests {
 
 	@Test
 	public void contextLoads() {
