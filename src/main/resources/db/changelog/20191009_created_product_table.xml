@@ -5,14 +5,14 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="00000000000001" author="lukasz.dziedzic">
-        <createTable tableName="product">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+        <createTable tableName="products">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="manufacturer_name" type="varchar(50)">
+            <column name="manufacturer_name" type="varchar(100)">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="model_name" type="varchar(60)">
+            <column name="model_name" type="varchar(100)">
                 <constraints nullable="false" />
             </column>
             <column name="price" type="float"/>

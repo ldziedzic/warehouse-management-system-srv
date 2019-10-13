@@ -8,6 +8,10 @@
 spring:
     liquibase:
         change-log: classpath:db/liquibase-changelog.xml
+    jpa:
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate:
+        ddl-auto: validate
     datasource:
         url: jdbc:mysql://localhost:3306/warehouse?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
         username: warehouse
