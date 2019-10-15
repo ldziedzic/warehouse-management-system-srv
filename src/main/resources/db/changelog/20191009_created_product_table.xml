@@ -10,7 +10,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="manufacturer_name" type="varchar(100)">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>
             <column name="model_name" type="varchar(100)">
                 <constraints nullable="false" />

@@ -32,43 +32,35 @@ public class Product {
     public Product() {
     }
 
-    public Product(@NotNull String manufacturerName, @NotNull String modelName, @NotNull float price, @NotNull int quantity) {
+    public Product(@NotNull String manufacturerName, @NotNull String modelName, @NotNull float price) {
         this.manufacturerName = manufacturerName;
         this.modelName = modelName;
         this.price = price;
-        this.quantity = quantity;
+        this.quantity = 0;
     }
 
     public String getManufacturerName() {
         return manufacturerName;
     }
 
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
-    }
-
     public String getModelName() {
         return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
     }
 
     public float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void changeQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public void decreaseQuantity(int quantity) {
+        this.quantity -= quantity;
     }
 }
 
