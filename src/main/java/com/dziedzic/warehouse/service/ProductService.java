@@ -2,7 +2,8 @@ package com.dziedzic.warehouse.service;
 
 import com.dziedzic.warehouse.model.Product;
 import com.dziedzic.warehouse.repository.ProductRepository;
-import com.dziedzic.warehouse.service.dto.ChangeProductQuantityDTO;
+import com.dziedzic.warehouse.service.dto.ProductQuantityDTO;
+import com.dziedzic.warehouse.service.dto.ProductDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,27 +26,60 @@ public class ProductService {
     }
 
     public void addNewProduct(Product product) {
-        String modelName = product.getModelName();
-        String manufacturerName = product.getManufacturerName();
-        log.info("Adding new product: " + manufacturerName + " " + modelName);
+        log.info("Adding new product: " + product.getModelName() + " " + product.getManufacturerName());
         productRepository.save(product);
     }
 
-    public Optional<Product> changeProductQuantity(ChangeProductQuantityDTO productQuantityDTO) {
+    public Optional<Product> changeProductQuantity(ProductQuantityDTO productQuantityDTO) {
         String modelName = productQuantityDTO.getModelName();
         String manufacturerName = productQuantityDTO.getManufacturerName();
         int quantity = productQuantityDTO.getQuantity();
-        log.info("Changing quantity of product" + manufacturerName + " " + modelName + "by " + quantity);
+        log.info("Changing quantity of product " + manufacturerName + " " + modelName + "by " + quantity);
 
+        Optional<Product> product = getProduct(modelName, manufacturerName);
+        if (product.isEmpty()) return Optional.empty();
+
+        product.get().changeQuantity(quantity);
+
+        productRepository.save(product.get());
+        return product;
+    }
+
+    public Optional<Product> deactivateProduct(ProductDTO productDTO) {
+        String modelName = productDTO.getModelName();
+        String manufacturerName = productDTO.getManufacturerName();
+
+        log.info("Deactivating product " + manufacturerName + " " + modelName);
+
+        return changeProductActivation(modelName, manufacturerName, false);
+    }
+
+    public Optional<Product> activateProduct(ProductDTO productDTO) {
+        String modelName = productDTO.getModelName();
+        String manufacturerName = productDTO.getManufacturerName();
+
+        log.info("Activating product " + manufacturerName + " " + modelName);
+
+        return changeProductActivation(modelName, manufacturerName, true);
+    }
+
+    private Optional<Product> changeProductActivation(String modelName, String manufacturerName, boolean isActive) {
+        Optional<Product> product = getProduct(modelName, manufacturerName);
+        if (product.isEmpty()) return Optional.empty();
+
+        product.get().setActive(isActive);
+
+        productRepository.save(product.get());
+        return product;
+    }
+
+    private Optional<Product> getProduct(String modelName, String manufacturerName) {
         Optional<Product> product = productRepository.findOneByManufacturerNameAndModelName(manufacturerName, modelName);
 
         if (product.isEmpty()) {
             log.warn("Failed to get product " + manufacturerName + " " + modelName);
             return Optional.empty();
         }
-        product.get().changeQuantity(quantity);
-
-        productRepository.save(product.get());
         return product;
     }
 }

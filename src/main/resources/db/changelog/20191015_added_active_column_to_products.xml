@@ -4,6 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <include file="changelog/20191009_created_product_table.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/20191015_added_active_column_to_products.xml" relativeToChangelogFile="true"/>
+    <changeSet id="00000000000002" author="lukasz.dziedzic">
+        <addColumn tableName="products">
+            <column name="active" type="bool" defaultValue="true">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

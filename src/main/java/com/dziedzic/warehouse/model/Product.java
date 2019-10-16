@@ -27,7 +27,10 @@ public class Product {
     private float price;
 
     @NotNull
-    private int quantity;
+    private int quantity = 0;
+
+    @NotNull
+    private boolean active = true;
 
     public Product() {
     }
@@ -36,7 +39,6 @@ public class Product {
         this.manufacturerName = manufacturerName;
         this.modelName = modelName;
         this.price = price;
-        this.quantity = 0;
     }
 
     public String getManufacturerName() {
@@ -59,8 +61,8 @@ public class Product {
         this.quantity += quantity;
     }
 
-    public void decreaseQuantity(int quantity) {
-        this.quantity -= quantity;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
 
