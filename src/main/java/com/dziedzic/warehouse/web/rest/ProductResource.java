@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -18,13 +19,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/warehouse/products")
-public class WarehouseResource {
+public class ProductResource {
     private static final int NEGATIVE_FACTOR = -1;
     private final ProductService productService;
 
-    public WarehouseResource(ProductService productService) {
+    public ProductResource(ProductService productService) {
         this.productService = productService;
     }
+
+    @GetMapping("/token")
+    public String token(@RequestParam String token) {
+        return token;
+    }
+
 
     @GetMapping("/get_products")
     public List<Product> getProducts() {
