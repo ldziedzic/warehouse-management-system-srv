@@ -2,11 +2,11 @@ package com.dziedzic.warehouse.config;
 
 import com.dziedzic.warehouse.security.RestAuthenticationEntryPoint;
 import com.dziedzic.warehouse.security.TokenAuthenticationFilter;
-import com.dziedzic.warehouse.security.oauth2.CustomOAuth2UserService;
+import com.dziedzic.warehouse.security.oauth2.OAuth2UserService;
 import com.dziedzic.warehouse.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.dziedzic.warehouse.security.oauth2.OAuth2AuthenticationFailureHandler;
 import com.dziedzic.warehouse.security.oauth2.OAuth2AuthenticationSuccessHandler;
-import com.dziedzic.warehouse.service.CustomUserDetailsService;
+import com.dziedzic.warehouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,10 +32,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private UserService userService;
 
     @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
+    private OAuth2UserService OAuth2UserService;
 
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService)
+                .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
     }
 
@@ -118,7 +118,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .baseUri("/oauth2/callback/*")
                         .and()
                     .userInfoEndpoint()
-                        .userService(customOAuth2UserService)
+                        .userService(OAuth2UserService)
                         .and()
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
