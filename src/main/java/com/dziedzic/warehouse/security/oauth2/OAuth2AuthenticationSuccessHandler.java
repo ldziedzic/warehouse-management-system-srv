@@ -42,7 +42,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     private String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        String targetUrl = "http://localhost:8080/auth/token";
+        String targetUrl = "http://lukasz-d.pl/auth/browser_token_singin";
         String token = tokenProvider.createToken(authentication);
 
         return UriComponentsBuilder.fromUriString(targetUrl)

@@ -21,7 +21,7 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        String targetUrl = "http://localhost:8080/auth/token";
+        String targetUrl = "http://lukasz-d.pl/auth/browser_token_singin";
         targetUrl = UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("error", exception.getLocalizedMessage())
                 .build().toUriString();

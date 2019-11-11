@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HttpsConfig {
 
-    private static final int PORT = 8080;
-    private static final int REDIRECT_PORT = 8443;
+    private static final int PORT = 80;
+    private static final int REDIRECT_PORT = 443;
 
     @Bean
     public ServletWebServerFactory servletContainer() {
