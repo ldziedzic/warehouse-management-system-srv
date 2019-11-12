@@ -2,7 +2,7 @@ package com.dziedzic.warehouse.config;
 
 import com.dziedzic.warehouse.security.RestAuthenticationEntryPoint;
 import com.dziedzic.warehouse.security.TokenAuthenticationFilter;
-import com.dziedzic.warehouse.security.oauth2.OAuth2UserService;
+import com.dziedzic.warehouse.service.OAuth2UserService;
 import com.dziedzic.warehouse.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.dziedzic.warehouse.security.oauth2.OAuth2AuthenticationFailureHandler;
 import com.dziedzic.warehouse.security.oauth2.OAuth2AuthenticationSuccessHandler;

@@ -27,12 +27,6 @@ public class ProductResource {
         this.productService = productService;
     }
 
-    @GetMapping("/token")
-    public String token(@RequestParam String token) {
-        return token;
-    }
-
-
     @GetMapping("/get_products")
     public List<Product> getProducts() {
         return productService.getAllProducts();

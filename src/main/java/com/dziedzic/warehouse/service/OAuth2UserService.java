@@ -1,4 +1,4 @@
-package com.dziedzic.warehouse.security.oauth2;
+package com.dziedzic.warehouse.service;
 
 import com.dziedzic.warehouse.exception.OAuth2AuthenticationProcessingException;
 import com.dziedzic.warehouse.model.AuthProvider;
@@ -77,5 +77,4 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);
     }
-
 }
