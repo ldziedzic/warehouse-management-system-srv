@@ -2,6 +2,7 @@ package com.dziedzic.warehouse.service;
 
 import com.dziedzic.warehouse.model.Product;
 import com.dziedzic.warehouse.repository.ProductRepository;
+import com.dziedzic.warehouse.service.dto.ProductEditDTO;
 import com.dziedzic.warehouse.service.dto.ProductQuantityDTO;
 import com.dziedzic.warehouse.service.dto.ProductDTO;
 import org.slf4j.Logger;
@@ -27,7 +28,33 @@ public class ProductService {
 
     public void addNewProduct(Product product) {
         log.info("Adding new product: " + product.getModelName() + " " + product.getManufacturerName());
-        productRepository.save(product);
+
+        if (getProduct(product.getModelName(), product.getManufacturerName()).isPresent()) {
+            log.info("Error. Product " + product.getModelName() + " " + product.getManufacturerName() + "exists");
+        } else {
+            productRepository.save(product);
+        }
+
+    }
+
+    public Optional<Product> editProduct(ProductEditDTO productEditDTO) {
+        String modelName = productEditDTO.getModelName();
+        String manufacturerName = productEditDTO.getManufacturerName();
+
+        Optional<Product> product = getProduct(modelName, manufacturerName);
+        if (product.isEmpty()) return Optional.empty();
+
+        if (getProduct(productEditDTO.getNewModelName(), productEditDTO.getNewManufacturerName()).isPresent()) {
+            log.info("Product " + productEditDTO.getNewModelName() + " " + productEditDTO.getNewManufacturerName() + "exists");
+            return Optional.empty();
+        }
+
+        product.get().setModelName(productEditDTO.getNewModelName());
+        product.get().setManufacturerName(productEditDTO.getNewManufacturerName());
+        product.get().setPrice(productEditDTO.getPrice());
+
+        productRepository.save(product.get());
+        return product;
     }
 
     public Optional<Product> changeProductQuantity(ProductQuantityDTO productQuantityDTO) {

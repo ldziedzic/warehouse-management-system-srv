@@ -64,5 +64,17 @@ public class Product {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 }
 

@@ -2,6 +2,7 @@ package com.dziedzic.warehouse.web.rest;
 
 import com.dziedzic.warehouse.model.Product;
 import com.dziedzic.warehouse.service.ProductService;
+import com.dziedzic.warehouse.service.dto.ProductEditDTO;
 import com.dziedzic.warehouse.service.dto.ProductQuantityDTO;
 import com.dziedzic.warehouse.service.dto.ProductDTO;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,6 +36,11 @@ public class ProductResource {
     @PostMapping("/add_product")
     public void addProduct(@Valid @RequestBody Product product) {
         productService.addNewProduct(product);
+    }
+
+    @PutMapping("/edit_product")
+    public Optional<Product> decreaseProductQuantity(@RequestBody ProductEditDTO productEditDTO) {
+        return productService.editProduct(productEditDTO);
     }
 
     @PutMapping("/increase_product_quantity")
