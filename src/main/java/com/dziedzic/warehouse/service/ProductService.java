@@ -1,6 +1,7 @@
 package com.dziedzic.warehouse.service;
 
 import com.dziedzic.warehouse.model.Product;
+import com.dziedzic.warehouse.model.User;
 import com.dziedzic.warehouse.repository.ProductRepository;
 import com.dziedzic.warehouse.service.dto.ProductEditDTO;
 import com.dziedzic.warehouse.service.dto.ProductQuantityDTO;
@@ -21,9 +22,11 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts(User user) {
         log.info("Getting all products.");
-        return productRepository.findAll();
+        if (user.getRole().equals("manager"))
+            return productRepository.findAll();
+        return productRepository.findAllByActive(true);
     }
 
     public void addNewProduct(Product product) {
