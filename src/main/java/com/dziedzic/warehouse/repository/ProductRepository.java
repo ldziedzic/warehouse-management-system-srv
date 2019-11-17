@@ -10,4 +10,5 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     Optional<Product> findOneByManufacturerNameAndModelName(String manufacturer, String model);
     List<Product> findAll();
+    List<Product> findAllByActive(Boolean active);
 }
