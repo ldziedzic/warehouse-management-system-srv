@@ -1,6 +1,7 @@
 package com.dziedzic.warehouse.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +44,13 @@ public class User {
     private AuthProvider provider;
 
     private String providerId;
+
+    @Column(nullable = false)
+    private String role;
+
+    public User() {
+        role = "user";
+    }
 
     public Long getId() {
         return id;
@@ -106,5 +114,13 @@ public class User {
 
     public void setProviderId(String providerId) {
         this.providerId = providerId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

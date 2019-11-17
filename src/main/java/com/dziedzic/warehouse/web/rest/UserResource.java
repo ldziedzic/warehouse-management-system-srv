@@ -3,6 +3,7 @@ package com.dziedzic.warehouse.web.rest;
 import com.dziedzic.warehouse.model.User;
 import com.dziedzic.warehouse.security.TokenProvider;
 import com.dziedzic.warehouse.service.UserService;
+import com.dziedzic.warehouse.service.dto.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,9 @@ public class UserResource {
     }
 
     @GetMapping("/get_current")
-    public User getCurrentUser(HttpServletRequest request) {
+    public UserDTO getCurrentUser(HttpServletRequest request) {
         String token = tokenProvider.getJwtFromRequest(request);
-        return userService.getUserByJwtToken(token);
+        User user = userService.getUserByJwtToken(token);
+        return new UserDTO(user.getName(), user.getEmail(), user.getRole());
     }
 }
