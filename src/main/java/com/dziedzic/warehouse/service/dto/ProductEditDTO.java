@@ -1,6 +1,8 @@
 package com.dziedzic.warehouse.service.dto;
 
 
+import javax.validation.constraints.NotNull;
+
 public class ProductEditDTO {
 
     private String manufacturerName;
@@ -15,16 +17,20 @@ public class ProductEditDTO {
 
     private String newModelName;
 
+    @NotNull
+    private String guid;
+
     public ProductEditDTO() {
     }
 
-    public ProductEditDTO(String manufacturerName, String modelName, int price, int quantity, String newManufacturerName, String newModelName) {
+    public ProductEditDTO(String manufacturerName, String modelName, int price, int quantity, String newManufacturerName, String newModelName, @NotNull String guid) {
         this.manufacturerName = manufacturerName;
         this.modelName = modelName;
         this.price = price;
         this.quantity = quantity;
         this.newManufacturerName = newManufacturerName;
         this.newModelName = newModelName;
+        this.guid = guid;
     }
 
     public String getManufacturerName() {
@@ -73,6 +79,10 @@ public class ProductEditDTO {
 
     public void setNewModelName(String newModelName) {
         this.newModelName = newModelName;
+    }
+
+    public String getGuid() {
+        return guid;
     }
 }
 

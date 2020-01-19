@@ -1,10 +1,9 @@
 package com.dziedzic.warehouse.service.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ProductQuantityDTO {
+public class ProductAddDTO {
     @NotNull
     @Size(max=100)
     private String manufacturerName;
@@ -13,21 +12,18 @@ public class ProductQuantityDTO {
     @Size(max=100)
     private String modelName;
 
-    @NotNull
-    @Min(value = 0, message = "The value must be positive")
-    private int quantity;
+    private int price;
 
     @NotNull
     private String guid;
 
-    public ProductQuantityDTO() {
+    public ProductAddDTO() {
     }
 
-    public ProductQuantityDTO(@NotNull String manufacturerName, @NotNull String modelName,
-                              @NotNull Integer quantity, @NotNull String guid) {
+    public ProductAddDTO(@NotNull String manufacturerName, @NotNull String modelName, int price, @NotNull String guid) {
         this.manufacturerName = manufacturerName;
         this.modelName = modelName;
-        this.quantity = quantity;
+        this.price = price;
         this.guid = guid;
     }
 
@@ -39,16 +35,12 @@ public class ProductQuantityDTO {
         return modelName;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getGuid() {
         return guid;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
 

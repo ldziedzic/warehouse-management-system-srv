@@ -12,12 +12,16 @@ public class ProductDTO {
     @Size(max=100)
     private String modelName;
 
+    @NotNull
+    private String guid;
+
     public ProductDTO() {
     }
 
-    public ProductDTO(@NotNull String manufacturerName, @NotNull String modelName) {
+    public ProductDTO(@NotNull String manufacturerName, @NotNull String modelName, @NotNull String guid) {
         this.manufacturerName = manufacturerName;
         this.modelName = modelName;
+        this.guid = guid;
     }
 
     public String getManufacturerName() {
@@ -26,6 +30,10 @@ public class ProductDTO {
 
     public String getModelName() {
         return modelName;
+    }
+
+    public String getGuid() {
+        return guid;
     }
 }
 
